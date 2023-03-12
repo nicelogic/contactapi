@@ -41,7 +41,7 @@ func (client *ContactApiClient)ContactRelationship(ctx context.Context, userID s
 	  }
 `)
 	req.Var("userId", userID)
-	req.Header.Set("authorization", token)
+	req.Header.Set("authorization", "Bearer " + token)
 	var response contactRelationshipResponse 
 	if err := client.client.Run(ctx, req, &response); err != nil {
 		return "", err
