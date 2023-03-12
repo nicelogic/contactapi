@@ -2,7 +2,7 @@
 
 version=$1
 
-git add .
+git add ../
 git commit
 git tag $version
 echo "update version: $version"
