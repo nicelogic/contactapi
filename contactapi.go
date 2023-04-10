@@ -14,14 +14,12 @@ const (
 	ContactRelationshipAddedEachOther string = "addedEachOther"
 )
 
-type ContactRelationship string
-
 type Relation struct {
-	UserID                 string              `json:"userId"`
-	ContactID              string              `json:"contactID"`
-	ContactRemarkName      string              `json:"contactRemarkName"`
-	Relationship           ContactRelationship `json:"relationship"`
-	MyRemarkNameForContact string              `json:"myRemarkNameForContact"`
+	UserID                 string `json:"userId"`
+	ContactID              string `json:"contactID"`
+	ContactRemarkName      string `json:"contactRemarkName"`
+	Relationship           string `json:"relationship"`
+	MyRemarkNameForContact string `json:"myRemarkNameForContact"`
 }
 
 type ContactApiClient struct {
@@ -64,20 +62,19 @@ func (client *ContactApiClient) Relation(ctx context.Context, contactID string, 
 		return nil, fmt.Errorf("response parse error")
 	}
 	relation := &Relation{}
-	relation.UserID, ok= responseMap["userId"].(string)
+	relation.UserID, ok = responseMap["userId"].(string)
 	if !ok {
 		return nil, fmt.Errorf("response parse(userId) error")
 	}
-	relation.ContactID , ok= responseMap["contactId"].(string)
+	relation.ContactID, ok = responseMap["contactId"].(string)
 	if !ok {
 		return nil, fmt.Errorf("response parse(contactId) error")
 	}
-	relation.ContactRemarkName, ok= responseMap["contactRemarkName"].(string)
+	relation.ContactRemarkName, ok = responseMap["contactRemarkName"].(string)
 	if !ok {
 		return nil, fmt.Errorf("response parse(contactRemarkName) error")
 	}
-	relationship, ok := responseMap["relationship"].(string)
-	relation.Relationship = ContactRelationship(relationship)
+	relation.Relationship, ok = responseMap["relationship"].(string)
 	if !ok {
 		return nil, fmt.Errorf("response parse(relationship) error")
 	}
